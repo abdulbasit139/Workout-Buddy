@@ -101,5 +101,6 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
-
-/* Just a little change to show the activity on git hub */
+input.error {
+  border: 1px solid var(--error);
+}
