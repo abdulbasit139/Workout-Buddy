@@ -8,7 +8,7 @@ const getWorkouts = async (req, res) => {
     const workouts = await Workout.find({}).sort({ createdAt: -1 })
 
     if (!workouts) {
-        return res.status(404).json({mssg: "No workout foun"})
+        return res.status(404).json({mssg: "No workout found"})
     }
 
     res.status(200).json(workouts)
