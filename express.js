@@ -1,5 +1,6 @@
 const express = require('express');
 const workoutsRouter = require('./Routes/workouts');
+const userRoutes = require('./Routes/userRoutes')
 const mongoose = require('mongoose');
 require("dotenv").config();
 
@@ -29,5 +30,8 @@ app.use((req, res, next) => {
 
 // Workout Routes
 app.use('/api/workouts', workoutsRouter);
+
+// user Routes
+app.use('/api/user', userRoutes)
 
 process.env

@@ -50,7 +50,7 @@ const postWorkout = async (req, res) => {
 
     try {
         const workout = await Workout.create({title, reps, load})
-        res.status(200).json({mssg: "New Workout Added!", workout})
+        res.status(200).json({workout, mssg: "New Workout Added!"})
     } catch (error) {
         res.status(400).json({error: "Please fill out all the fields", emptyField})
     }   
