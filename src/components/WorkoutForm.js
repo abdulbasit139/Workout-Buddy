@@ -8,7 +8,6 @@ const WorkoutForm = () => {
     const [reps, setReps] = useState('')
     const [error, setError] = useState(null)
     const [emptyField, setEmptyField] = useState([])
-    const [mssg, setMssg] = useState(null)
 
 
     const { dispatch } = useWorkoutsContext();
@@ -29,14 +28,12 @@ const WorkoutForm = () => {
         if (!response.ok) {
             setError(json.error)
             setEmptyField(json.emptyField)
-            setMssg(null)
         }
         if (response.ok) {
             setTitle('')
             setLoad('')
             setReps('')
             setError(null)
-            setMssg(json.mssg)
 
             console.log('New Workout Added', json);
             dispatch({ 
@@ -79,7 +76,6 @@ const WorkoutForm = () => {
 
                 <button>Add Workout</button>
                 {error && <div className="error">{error}</div>}
-                {mssg && <div className='mssg'>{ mssg }</div>}
             </form>
         </div>
         
