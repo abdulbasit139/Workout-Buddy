@@ -101,6 +101,14 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
+div.mssg {
+  padding: 10px;
+  background: #bafaff;
+  border: 1px solid #61e8f5;
+  color: var(--primary);
+  border-radius: 4px;
+  margin: 20px 0;
+}
 input.error {
   border: 1px solid var(--error);
 }
