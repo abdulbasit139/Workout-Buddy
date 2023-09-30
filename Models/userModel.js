@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const validator = require('validator')
 
 const Schema = mongoose.Schema
 
@@ -16,7 +17,18 @@ const userSchema = new Schema({
     }
 })
 
+// User Signup function
 userSchema.statics.signUp = async function(email, password) {
+
+    if (!email || !password) {
+        throw Error("All fields must be filled")
+    }
+    if (!validator.isEmail(email)){
+        throw Error("Not a valid Email")
+    }
+    if (!validator.isStrongPassword(password)){
+        throw Error("Password must be strong")
+    }
 
     const exist = await this.findOne({email});
 
@@ -30,6 +42,29 @@ userSchema.statics.signUp = async function(email, password) {
     const user = await this.create({email, password: hash})
 
     return user;
+}
+
+// User Login Function
+userSchema.statics.login = async function(email, password) {
+
+    if (!email || !password) {
+        throw Error("All fields must be filled")
+    }
+
+    const user = await this.findOne({email});
+
+    if (!user) {
+        throw Error("Invalid Email")
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+        throw Error("Invalid Password") 
+    }
+    
+    return user
+
 }
 
 module.exports = mongoose.model("User", userSchema)
